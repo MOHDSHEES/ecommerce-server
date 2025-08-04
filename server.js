@@ -9,7 +9,7 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 // 3. Define the port the server will listen on
-const port = 8080; // You can choose any available port, common ones are 3000, 5000, 8080
+const port = process.env.PORT || 8080; // You can choose any available port, common ones are 3000, 5000, 8080
 // Serve static files from the 'public' directory
 app.use(express.static("public"));
 // Middleware to parse JSON request bodies
