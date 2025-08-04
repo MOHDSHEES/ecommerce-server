@@ -3,6 +3,7 @@
 // 1. Import the Express module
 const express = require("express");
 const productApiRoutes = require("./routes/products");
+const serverless = require("serverless-http");
 const cors = require("cors");
 
 // 2. Create an Express application instance
@@ -22,6 +23,16 @@ app.get("/", (req, res) => {
 });
 
 // 5. Start the server and listen for incoming requests
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server is running on http://localhost:${port}`);
+// });
+
+module.exports = app;
+module.exports.handler = serverless(app);
+
+if (require.main === module) {
+  const port = process.env.PORT || 8080;
+  app.listen(port, () => {
+    console.log(`🚀 Local server running on http://localhost:${port}`);
+  });
+}
