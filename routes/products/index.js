@@ -15,6 +15,9 @@ router.use("/add", addProduct);
 router.use("/getById", require("./getById"));
 router.use("/getFilteredProducts", require("./getFilteredProducts"));
 router.use("/update", require("./update"));
+router.use("/uploadImages", require("./uploadImages"));
+router.use("/removeImage", require("./removeImage"));
+// router.use("/addToCart", require("./addToCart"));
 // router.delete("/:id", deleteProduct);
 // router.put("/:id", updateProduct);
 

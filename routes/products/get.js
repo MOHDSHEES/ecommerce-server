@@ -26,6 +26,8 @@ router.post("/", async (req, res) => {
     const { data: products, count, error } = await query;
 
     if (error) {
+      // console.log(error);
+
       return res.status(500).json({ success: false, message: error.message });
     }
 

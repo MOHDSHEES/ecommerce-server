@@ -10,12 +10,13 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 // 3. Define the port the server will listen on
-const port = process.env.PORT || 8080; // You can choose any available port, common ones are 3000, 5000, 8080
+// const port = process.env.PORT || 8080; // You can choose any available port, common ones are 3000, 5000, 8080
 // Serve static files from the 'public' directory
 app.use(express.static("public"));
 // Middleware to parse JSON request bodies
 app.use(express.json());
 app.use("/api/products", productApiRoutes);
+app.use("/api/cart", require("./routes/cart"));
 // 4. Define a basic route
 // This route will handle GET requests to the root URL ('/')
 app.get("/", (req, res) => {

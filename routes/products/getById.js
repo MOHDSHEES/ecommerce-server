@@ -113,6 +113,7 @@ router.get("/:id", async (req, res) => {
         .status(404)
         .json({ success: false, message: "Product not found" });
     }
+    // console.log(product_images);
 
     const {
       product_dimensions,
@@ -140,6 +141,7 @@ router.get("/:id", async (req, res) => {
       categories: product_categories?.map((c) => c.categories) || [],
       product_type: product_product_types?.map((pt) => pt.types) || [],
       tags: product_tags?.map((t) => t.tags) || [],
+      product_images: product_images || [],
     };
     // console.log(flatProduct);
 
