@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.use("/addToCart", require("./addToCart"));
 router.use("/getCartItems", require("./getCartItems"));
+router.use("/removeItem", require("./removeItem"));
+router.use("/updateItem", require("./updateItem"));
 // router.delete("/:id", deleteProduct);
 // router.put("/:id", updateProduct);
 

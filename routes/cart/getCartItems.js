@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
     // Step 1: Fetch all cart items for the user
     const { data: cartItems, error: cartError } = await supabase
       .from("cart_items")
-      .select("*")
+      .select("*,products(*)")
       .eq("user_id", user_id);
 
     if (cartError) throw cartError;
@@ -34,9 +34,31 @@ router.post("/", async (req, res) => {
 
         const variationDetails = variations.map((v) => v.product_variations);
 
+        // Step 2: Get all unique product IDs from the cart
+        const productIds = [
+          ...new Set(cartItems.map((item) => item.product_id)),
+        ];
+
+        // Step 3: Fetch ONE image per product in a single query
+        const { data: productImages, error: imgError } = await supabase
+          .from("product_images")
+          .select("product_id, url") // assuming "image_url" is your image column
+          .in("product_id", productIds);
+
+        if (imgError) throw imgError;
+
+        // Map product_id -> first image
+        const imageMap = {};
+        productImages.forEach((img) => {
+          if (!imageMap[img.product_id]) {
+            imageMap[img.product_id] = img.url;
+          }
+        });
+
         return {
           ...item,
           variations: variationDetails,
+          image: imageMap[item.product_id] || null,
         };
       })
     );
