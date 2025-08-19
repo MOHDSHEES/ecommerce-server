@@ -17,6 +17,9 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use("/api/products", productApiRoutes);
 app.use("/api/cart", require("./routes/cart"));
+app.use("/api/user", require("./routes/user"));
+app.use("/api/razorpay", require("./routes/payment/razorpay"));
+
 // 4. Define a basic route
 // This route will handle GET requests to the root URL ('/')
 app.get("/", (req, res) => {
