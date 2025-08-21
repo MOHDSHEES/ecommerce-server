@@ -15,8 +15,8 @@ router.post("/", async (req, res) => {
       .insert(data)
       .select()
       .single();
-    console.log(address);
-    console.log(addressError);
+    // console.log(address);
+    // console.log(addressError);
 
     if (addressError) throw addressError;
 
