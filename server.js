@@ -8,15 +8,18 @@ const cors = require("cors");
 
 // 2. Create an Express application instance
 const app = express();
-app.use(cors());
+// app.use(cors());
 
 app.use(
   cors({
-    origin: "*", // or your frontend URL in production
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    optionsSuccessStatus: 204,
+    maxAge: 600, // cache OPTIONS for 10 minutes
   })
 );
+
 // 3. Define the port the server will listen on
 // const port = process.env.PORT || 8080; // You can choose any available port, common ones are 3000, 5000, 8080
 // Serve static files from the 'public' directory
