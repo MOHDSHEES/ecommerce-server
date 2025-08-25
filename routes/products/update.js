@@ -4,7 +4,7 @@ const { supabase } = require("../../config/supabaseConfig"); // Adjust path as n
 
 router.post("/:id", async (req, res) => {
   const productId = req.params.id;
-  console.log(productId);
+  // console.log(productId);
 
   const {
     product_name,
