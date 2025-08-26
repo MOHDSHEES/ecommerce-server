@@ -30,6 +30,7 @@ app.use("/api/products", productApiRoutes);
 app.use("/api/cart", require("./routes/cart"));
 app.use("/api/user", require("./routes/user"));
 app.use("/api/razorpay", require("./routes/payment/razorpay"));
+app.use("/api/cod", require("./routes/payment/cod"));
 app.use("/api/order", require("./routes/order"));
 
 // 4. Define a basic route
