@@ -8,6 +8,7 @@ router.post("/", async (req, res) => {
 
   const { page = 1, limit = 10, filters = {} } = req.body;
   const offset = (page - 1) * limit;
+  // console.log(limit);
 
   try {
     // Build Supabase query
@@ -22,6 +23,7 @@ router.post("/", async (req, res) => {
         query = query.eq(key, filters[key]);
       }
     });
+    // console.log(query);
 
     const { data: products, count, error } = await query;
 
