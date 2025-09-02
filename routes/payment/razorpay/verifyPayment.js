@@ -18,8 +18,11 @@ router.post("/", async (req, res) => {
     const shasum = crypto.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET);
     shasum.update(`${razorpay_order_id}|${razorpay_payment_id}`);
     const digest = shasum.digest("hex");
+    // console.log(digest);
 
     if (digest === razorpay_signature) {
+      //   console.log("in");
+
       await supabase
         .from("orders")
         .update({
@@ -27,7 +30,7 @@ router.post("/", async (req, res) => {
           razorpay_signature,
           payment_status: "paid",
         })
-        .eq("razorpay_order_id", razorpay_order_id);
+        .eq("order_id", razorpay_order_id);
       return res.json({
         success: true,
         orderId: razorpay_order_id,
@@ -39,7 +42,7 @@ router.post("/", async (req, res) => {
         .update({
           payment_status: "failed",
         })
-        .eq("razorpay_order_id", razorpay_order_id);
+        .eq("order_id", razorpay_order_id);
       return res
         .status(400)
         .json({ success: false, message: "Invalid signature" });
