@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
       billing_address,
       shipping_address,
     } = req.body;
-    // console.log(amount);
+    console.log(amount);
     // console.log(user_id);
     // console.log(amount);
     // console.log(billing_address);
