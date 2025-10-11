@@ -7,6 +7,7 @@ const {
   // assignPickup,
 } = require("./services/shiprocket");
 const { updateOrderService } = require("../order/services/order");
+const { supabase } = require("../../config/supabaseConfig");
 
 const SHIPROCKET_STATUS_MAP = {
   1: "New",
@@ -49,6 +50,11 @@ router.post("/", async (req, res) => {
         },
       },
     });
+
+    const { data: d, err } = await supabase
+      .from("orders")
+      .update({ status: "Processing" })
+      .eq("order_id", data.order_id);
 
     // // Step 3: Assign AWB if not already assigned
     // let awbData = null;
