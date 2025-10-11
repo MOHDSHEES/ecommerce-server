@@ -32,6 +32,7 @@ app.use("/api/user", require("./routes/user"));
 app.use("/api/razorpay", require("./routes/payment/razorpay"));
 app.use("/api/cod", require("./routes/payment/cod"));
 app.use("/api/order", require("./routes/order"));
+app.use("/api/shiprocket", require("./routes/shiprocket"));
 
 // 4. Define a basic route
 // This route will handle GET requests to the root URL ('/')
