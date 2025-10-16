@@ -29,6 +29,7 @@ router.post("/", async (req, res) => {
       amount,
       currency,
       receipt: `rcpt_${Date.now()}`,
+      offers: ["offer_RUGV3QEyr0rBGp"],
     });
 
     // 2️⃣ Insert order into Supabase
