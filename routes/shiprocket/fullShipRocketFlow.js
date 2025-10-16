@@ -41,20 +41,21 @@ router.post("/", async (req, res) => {
       updated_data: {
         shipment_order_id: orderData.order_id,
         shipment_id: orderData.shipment_id,
-        shipment_workflow: "order_created",
-        dimensions: {
-          length: data.length,
-          breadth: data.breadth,
-          height: data.height,
-          weight: data.weight,
-        },
+        // shipment_workflow: "order_created",
+        status: "processing",
+        // dimensions: {
+        //   length: data.length,
+        //   breadth: data.breadth,
+        //   height: data.height,
+        //   weight: data.weight,
+        // },
       },
     });
 
-    const { data: d, err } = await supabase
-      .from("orders")
-      .update({ status: "Processing" })
-      .eq("order_id", data.order_id);
+    // const { data: d, err } = await supabase
+    //   .from("orders")
+    //   .update({ status: "processing" })
+    //   .eq("order_id", data.order_id);
 
     // // Step 3: Assign AWB if not already assigned
     // let awbData = null;
