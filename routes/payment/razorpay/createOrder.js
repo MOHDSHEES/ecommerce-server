@@ -32,6 +32,8 @@ router.post("/", async (req, res) => {
       offers: ["offer_RUGV3QEyr0rBGp"],
     });
     const amountPayable = razorpayOrder.amount_due || razorpayOrder.amount;
+    // console.log(amountPayable);
+
     // 2️⃣ Insert order into Supabase
     const { data, error } = await supabase
       .from("orders")
@@ -39,7 +41,7 @@ router.post("/", async (req, res) => {
         {
           user_id,
           order_id: razorpayOrder.id,
-          amountPayable,
+          amount: amountPayable,
           currency,
           status: "pending",
           payment_status: "pending",

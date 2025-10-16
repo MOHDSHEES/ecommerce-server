@@ -41,6 +41,7 @@ router.post("/", async (req, res) => {
         .from("orders")
         .update({
           payment_status: "failed",
+          status: "cancelled",
         })
         .eq("order_id", razorpay_order_id);
       return res
