@@ -9,10 +9,21 @@ const cors = require("cors");
 // 2. Create an Express application instance
 const app = express();
 // app.use(cors());
-
+const allowedOrigins = ["https://www.mamark.shop", "https://mamark.shop"];
 app.use(
   cors({
-    origin: "*",
+    // origin: "*",
+    origin: function (origin, callback) {
+      // allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 204,
@@ -32,6 +43,7 @@ app.use("/api/user", require("./routes/user"));
 app.use("/api/razorpay", require("./routes/payment/razorpay"));
 app.use("/api/cod", require("./routes/payment/cod"));
 app.use("/api/order", require("./routes/order"));
+app.use("/api/email", require("./routes/email"));
 app.use("/api/shiprocket", require("./routes/shiprocket"));
 
 // 4. Define a basic route
